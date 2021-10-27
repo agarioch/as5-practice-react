@@ -9,9 +9,15 @@
   "author": "alistairgarioch@gmail.com",
   "license": "ISC",
   "devDependencies": {
+    "cz-changelog": "^1.0.1",
     "eslint": "^8.1.0",
     "eslint-plugin-json": "^3.1.0",
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-changelog"
+    }
   }
 }
