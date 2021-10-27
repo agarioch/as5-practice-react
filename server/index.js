@@ -10,7 +10,7 @@ require('dotenv').config();
 
 const app = Express();
 
-app.use(cors({origin: 'http://localhost'}));
+app.use(cors({origin: 'http://localhost:3001'}));
 app.use(Express.json());
 app.use(morgan('short'));
 app.use('/', router);
