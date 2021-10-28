@@ -1,4 +1,5 @@
 import { React, useState } from 'react';
+import './post-form.css';
 
 export default function PostForm(props) {
   const { submitHandler } = props;
@@ -26,7 +27,7 @@ export default function PostForm(props) {
     >
       <input className="post-form__input" type="text" value={author} onInput={handleAuthorInput} placeholder="your name ..." />
       <input className="post-form__input" type="text" value={input} onInput={handleContentInput} placeholder="message ..." />
-      <button type="submit">✉️ Send</button>
+      <button className="post-form__submit" type="submit">✉️ Send</button>
     </form>
   )
 }

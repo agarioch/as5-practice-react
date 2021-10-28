@@ -4,6 +4,7 @@
   "description": "Practice for codeworks weekly assessment 5",
   "main": "index.js",
   "scripts": {
+    "start": "cd server && npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "alistairgarioch@gmail.com",
