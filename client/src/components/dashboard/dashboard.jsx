@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from 'react';
-import { getPosts, postOne, deleteOne } from '../../services/posts-api';
+import { getPosts, postOne, deleteOne, putVote } from '../../services/posts-api';
 import PostList from '../post-list/post-list';
 import PostForm from '../post-form/post-form';
 import './dashboard.css'
@@ -15,6 +15,15 @@ export default function Dashboard(props) {
   const deletePostHandler = (id) => {
     deleteOne(id)
       .then(() => setPosts(prior => prior.filter(p => p.id !== id)));
+  }
+  const voteHandler = (id, vote) => {
+    putVote(id, vote)
+      .then((res) => setPosts(prior => {
+        const votePost = prior.find(p => p.id === id);
+        votePost.votes = res.votes;
+        return [...prior];
+      }
+      ));
   }
 
   // Load posts
@@ -36,7 +45,7 @@ export default function Dashboard(props) {
           : (
             <div className="posts">
               <PostForm submitHandler={sumbitPostHandler} />
-              <PostList posts={posts} handleDelete={deletePostHandler} />
+              <PostList posts={posts} handleDelete={deletePostHandler} handleVote={voteHandler}/>
             </div>
           )}
       </main>

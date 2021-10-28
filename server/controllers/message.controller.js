@@ -39,11 +39,11 @@ async function putVote (req, res) {
   const vote = req.params.vote;
   const id = parseInt(req.params.id);
   const change = (vote === 'up') ? 1 : -1;
-  console.log('voting', id, change, vote);
   try {
-    const dbRes = await db.Post.vote(id, change); 
+    // sequelize returns an array [response, metadata-object]
+    const dbRes = await db.Post.vote(id, change);
     res.status(202);
-    res.send(dbRes);
+    res.send(...dbRes[0]);
     res.end();
   } catch (error) {
     res.status(500);

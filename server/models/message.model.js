@@ -32,8 +32,13 @@ function createMessageModel (sequelize, DataTypes) {
     return await this.destroy({where: {id}});
   };
   Post.vote = async function (id, change) {
-    console.log(id, change);
-    return await this.increment('votes', {by:change, where:{id}});
+    // return await this.increment('votes', {by:change, where:{id}, returning:true});
+    return await sequelize.query(`
+      UPDATE "Posts"
+      SET votes=votes+${change}
+      WHERE id=${id}
+      RETURNING *;`
+    );
   };
 
   return Post;

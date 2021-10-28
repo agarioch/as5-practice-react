@@ -22,5 +22,10 @@ export function deleteOne(id) {
     method: 'DELETE'
   })
 };
+export function putVote(id, vote) {
+  return fetchRequest(`/messages/${id}/${vote}`, {
+    method: 'PUT'
+  })
+}
 
 
