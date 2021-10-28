@@ -26,7 +26,7 @@ async function deleteOne (req, res) {
   const id = parseInt(req.params.id);
   if (id > 0) {
     await db.Post.deleteOne(id);
-    res.status(200);
+    res.status(204);
     res.end();
   } else {
     res.status(500);
