@@ -43,7 +43,7 @@ async function putVote (req, res) {
     // sequelize returns an array [response, metadata-object]
     const dbRes = await db.Post.vote(id, change);
     res.status(202);
-    res.send(...dbRes[0]);
+    res.send(dbRes.dataValues);
     res.end();
   } catch (error) {
     res.status(500);

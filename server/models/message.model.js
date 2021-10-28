@@ -25,6 +25,9 @@ function createMessageModel (sequelize, DataTypes) {
   Post.getAll = async function () {
     return await this.findAll();
   };
+  Post.getOne = async function (id) {
+    return await this.findOne({where: {id}});
+  };
   Post.postOne = async function (post) {
     return await this.create(post);
   };
@@ -32,13 +35,15 @@ function createMessageModel (sequelize, DataTypes) {
     return await this.destroy({where: {id}});
   };
   Post.vote = async function (id, change) {
-    // return await this.increment('votes', {by:change, where:{id}, returning:true});
-    return await sequelize.query(`
-      UPDATE "Posts"
-      SET votes=votes+${change}
-      WHERE id=${id}
-      RETURNING *;`
-    );
+    const post = await this.getOne(id);
+    return await post.increment('votes', {by: change});
+
+    // return await sequelize.query(`
+    //   UPDATE "Posts"
+    //   SET votes=votes+${change}
+    //   WHERE id=${id}
+    //   RETURNING *;`
+    // );
   };
 
   return Post;
